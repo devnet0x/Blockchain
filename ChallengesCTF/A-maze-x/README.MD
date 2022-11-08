@@ -1,9 +1,11 @@
 # A-Maze-X Writeup #
 
 Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge.
+
 Thanks to @mattaereal and @patrickd_de for their in Deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
 I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (i left them hopping help you to get a better understandment).
-Any comments or corrections please reach me at my twitter account: @faucet0x9a54
+
+Any comments or corrections please reach me at my twitter account: **@faucet0x9a54**
 
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
@@ -17,10 +19,11 @@ Openzepelin:(https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/
 
 What you can see is tha VToken doesn’t use msg.sender to set the owner who allows use his tokens. What this means?...that if you call approve function, you can allow transfer tokens in behalf of any owner you set as parameter.
 Then what we can do?, One way, is build an attacker contract which:
-    • instance the vtoken contract
-    • get the current balance
-    • approve us transfer all tokens
-    • and at the end, transfer all tokens to our players account.  
+
+1. Instance the vtoken contract
+2. Get the current balance
+3. Approve us transfer all tokens
+4. Transfer all tokens to our player account.  
 
 ![](./img/03.png)
 
@@ -78,19 +81,15 @@ https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_
 
 ## Challenge 3: borrow, hide and seek ##
 Finally, in this challenge, as mentioned in the “familiar concepts section”, we must proceed with a oracle price attack, so lets build a contract which implement all known 4 steps in this kind of attack:
-
     1. Attacker borrows a large amount of token A from a protocol supporting flash loans.
 
 ![](./img/13.png)
-
     2. Attacker swaps token A for token B on a DEX (lowering the spot price of token A and increasing the spot price of token B on the DEX).
 
 ![](./img/14.png)
-
     3. Attacker deposits the purchased token B as collateral on a DeFi protocol that uses the spot price from the above DEX as its sole price feed, and uses the manipulated spot price to borrow a larger amount of token A than should normally be possible.
 
 ![](./img/15.png)
-
     4. Attacker uses a portion of borrowed token A to fully pay back the original flash loan and keep the remaining tokens, generating a profit using the protocol’s manipulated price feed.
 
 ![](./img/16.png)
