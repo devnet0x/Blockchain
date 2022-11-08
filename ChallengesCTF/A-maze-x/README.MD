@@ -5,7 +5,7 @@ Thanks to @mattaereal and @patrickd_de for their in Deep writeups which help me 
 I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (i left them hopping help you to get a better understandment).
 Any comments or corrections please reach me at my twitter account: @faucet0x9a54
 
-##Challenge 0: VitaToken seems safe, right?##
+## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
 Vtoken:
 
@@ -26,7 +26,7 @@ Source Code:
 https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
 
 
-##Challenge 1: What a nice Lender Pool!##
+##  Challenge 1: What a nice Lender Pool! ##
 Analyzing the contract, what we need to do is try to withdraw ISEC but how can we do that if we dont have any balance?.
 When analyze contract vulnerabilities, i’m always start searching for eventual reentrancy points (transfers with post balance update) and delegatecall (to manipulate variables using the same slots). In this case i found a delegatecall inside flashloan function, so it look like we can use this delegatecall to change the following contract global variables:
 
@@ -40,7 +40,7 @@ And this is the test sequence (only call to our attackers contract and change co
 Source Code:
 https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/1_LenderPool
 
-##Challenge 2: it's always sunny in decentralized exchanges##
+## Challenge 2: it's always sunny in decentralized exchanges ##
 In this challenge, we need to drain liquidity from the Dex, so analyzing contract we need to removeLiquidity, but how ca we do that if only can remove the same amount that we previously deposited?.
 Analyzing removeLiquidity function, we can see a transfer call previous to update balance so it’s a candidate to reentrancy calling this function recursively from a contract’s fallback. But, how can we do a fallback if no ethers transfer?, the answer is in ERC223 token implementation, where we can see a fallback call after transfer (as defined in ERC223 standard):
 
@@ -52,7 +52,7 @@ Source Code:
 https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_Dex
 
 
-##Challenge 3: borrow, hide and seek##
+## Challenge 3: borrow, hide and seek ##
 Finally, in this challenge, as mentioned in the “familiar concepts section”, we must proceed with a oracle price attack, so lets build a contract which implement all known 4 steps in this kind of attack:
     1. Attacker borrows a large amount of token A from a protocol supporting flash loans.
 
