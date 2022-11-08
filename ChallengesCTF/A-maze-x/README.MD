@@ -2,10 +2,10 @@
 
 Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge.
 
-Thanks to @mattaereal and @patrickd_de for their in Deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
-I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (i left them hopping help you to get a better understandment).
+Thanks to @mattaereal and @patrickd_de for their in deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
+I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (I left them with the hope that they can help you for a better understanding).
 
-Any comments or corrections please reach me at my twitter account: **@faucet0x9a54**
+Any comments/corrections please reach me at my twitter account: **@faucet0x9a54**
 
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
