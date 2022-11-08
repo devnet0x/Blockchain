@@ -81,16 +81,20 @@ https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_
 
 ## Challenge 3: borrow, hide and seek ##
 Finally, in this challenge, as mentioned in the “familiar concepts section”, we must proceed with a oracle price attack, so lets build a contract which implement all known 4 steps in this kind of attack:
-    1. Attacker borrows a large amount of token A from a protocol supporting flash loans.
+
+1. Attacker borrows a large amount of token A from a protocol supporting flash loans.
 
 ![](./img/13.png)
-    2. Attacker swaps token A for token B on a DEX (lowering the spot price of token A and increasing the spot price of token B on the DEX).
+
+2. Attacker swaps token A for token B on a DEX (lowering the spot price of token A and increasing the spot price of token B on the DEX).
 
 ![](./img/14.png)
-    3. Attacker deposits the purchased token B as collateral on a DeFi protocol that uses the spot price from the above DEX as its sole price feed, and uses the manipulated spot price to borrow a larger amount of token A than should normally be possible.
+
+3. Attacker deposits the purchased token B as collateral on a DeFi protocol that uses the spot price from the above DEX as its sole price feed, and uses the manipulated spot price to borrow a larger amount of token A than should normally be possible.
 
 ![](./img/15.png)
-    4. Attacker uses a portion of borrowed token A to fully pay back the original flash loan and keep the remaining tokens, generating a profit using the protocol’s manipulated price feed.
+
+4. Attacker uses a portion of borrowed token A to fully pay back the original flash loan and keep the remaining tokens, generating a profit using the protocol’s manipulated price feed.
 
 ![](./img/16.png)
 
