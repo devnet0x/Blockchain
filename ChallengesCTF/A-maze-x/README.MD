@@ -8,8 +8,12 @@ Any comments or corrections please reach me at my twitter account: @faucet0x9a54
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
 Vtoken:
+
 ![](./img/01.png)
+
 Openzepelin:(https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
+
+![](./img/02.png)
 
 What you can see is tha VToken doesn’t use msg.sender to set the owner who allows use his tokens. What this means?...that if you call approve function, you can allow transfer tokens in behalf of any owner you set as parameter.
 Then what we can do?, One way, is build an attacker contract which:
@@ -18,9 +22,15 @@ Then what we can do?, One way, is build an attacker contract which:
     • approve us transfer all tokens
     • and at the end, transfer all tokens to our players account.  
 
+![](./img/03.png)
+
 Then we just deploy challenge VToken contract and our attacker contract using the first account as our player account and second account as challenger account:
- 
+
+![](./img/04.png)
+
 The test file. Just change the addresses (toa and toa2) for your own deployed contracts addresses:
+
+![](./img/05.png)
 
 Source Code:
 https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
