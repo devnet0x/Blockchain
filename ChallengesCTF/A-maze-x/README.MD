@@ -8,7 +8,7 @@ Any comments or corrections please reach me at my twitter account: @faucet0x9a54
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
 Vtoken:
-!(./img/01.PNG)
+!(./img/01.png)
 Openzepelin:(https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
 
 What you can see is tha VToken doesn’t use msg.sender to set the owner who allows use his tokens. What this means?...that if you call approve function, you can allow transfer tokens in behalf of any owner you set as parameter.
