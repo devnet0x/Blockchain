@@ -1,4 +1,4 @@
-#A-Maze-X Writeup#
+# A-Maze-X Writeup #
 
 Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge.
 Thanks to @mattaereal and @patrickd_de for their in Deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
