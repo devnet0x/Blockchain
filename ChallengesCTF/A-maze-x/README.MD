@@ -36,7 +36,7 @@ The test file. Just change the addresses (toa and toa2) for your own deployed co
 ![](./img/05.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
 
 
 ##  Challenge 1: What a nice Lender Pool! ##
