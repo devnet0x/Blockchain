@@ -5,7 +5,7 @@ Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop
 Thanks to @mattaereal and @patrickd_de for their in deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
 I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (I left them with the hope that they can help you for a better understanding).
 
-Any comments/corrections please reach me at my twitter account: **@faucet0x9a54**
+Any comments/corrections please reach me at my twitter account: **@devnet0x**
 
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
