@@ -59,7 +59,7 @@ And this is the test sequence (only call to our attackers contract and change co
 ![](./img/09.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/1_LenderPool
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/1_LenderPool
 
 ## Challenge 2: it's always sunny in decentralized exchanges ##
 In this challenge, we need to drain liquidity from the Dex, so analyzing contract we need to removeLiquidity, but how ca we do that if only can remove the same amount that we previously deposited?.
@@ -76,7 +76,7 @@ Finally, let’s deploy and setup our challenge (see deploy.js) and runit with t
 ![](./img/12.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_Dex
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_Dex
 
 
 ## Challenge 3: borrow, hide and seek ##
@@ -104,4 +104,4 @@ Then, lets deploy and setup our challenge with deploy.js and finally lets test o
 
 Source Code:
 
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/3_Borrower
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/3_Borrower
