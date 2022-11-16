@@ -1,6 +1,6 @@
 # Damn Vulnerable Defi Foundry Writeup #
 
-Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge.
+Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge. Thanks to [nicolasgarcia214](https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry) for his Damn Vulnerable Defi Foundry version.
 
 Any comments/corrections please reach me at my twitter account: **@devnet0x**
 
