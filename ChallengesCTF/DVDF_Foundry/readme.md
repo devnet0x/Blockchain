@@ -1,6 +1,6 @@
 # Damn Vulnerable Defi Foundry Writeup #
 
-Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge. Thanks to [nicolasgarcia214](https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry) for his Damn Vulnerable Defi Foundry version.
+Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge. Thanks to [nicolasgarcia214](https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry) for his Damn Vulnerable Defi Foundry version and [Tincho](https://twitter.com/tinchoabbate) who created the first version of this game .
 
 Any comments/corrections please reach me at my twitter account: **@devnet0x**
 
@@ -98,7 +98,7 @@ Transfer all tokens to attacker
 Source Code:
 https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/03_Truster
 
-## Challenge 4: SideEntrance ##
+## Challenge 4: SideEntrance ## 
 
 The contract vulnerability is that you can cheat lender balance, depositing his own lender balance but under your account balance. To do that, you must build a contract that borrow ETH from the lender:
 
