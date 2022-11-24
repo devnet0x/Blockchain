@@ -1,8 +1,8 @@
 # Damn Vulnerable Defi Foundry Writeup #
 
-Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop Smart contract auditing skills. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge. Thanks to [nicolasgarcia214](https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry) for his Damn Vulnerable Defi Foundry version and [Tincho](https://twitter.com/tinchoabbate) who created the first version of this game .
+Hi, my name is Juan, i wrote this writeup to gain some Smart Contract Auditor experience. I previously resolved other challenges as Ethernaut and CaptureTheEther so i recommend try them before get into this more advanced Defi challenges so i will asume you have a previous basic knowledge. Thanks to [nicolasgarcia214](https://github.com/nicolasgarcia214/damn-vulnerable-defi-foundry) for his Damn Vulnerable Defi Foundry version and [Tincho](https://twitter.com/tinchoabbate) who created the first version of this game .
 
-Any comments/corrections please reach me at my twitter account: **@devnet0x**
+Any comments/corrections please reach me at my twitter account: [@devnet0x](https://twitter.com/devnet0x/)
 
 Special thanks to [StErMi](https://github.com/StErMi), [Patrickd](https://ventral.digital/posts?author=5af1f3e93eb1ea38b385c9ad) and [Poor4Ever](https://github.com/Poor4ever/) for their in deep writeups who helped me a lot.
 
