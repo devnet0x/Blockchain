@@ -5,7 +5,7 @@ Hi, my name is Juan,  i wrote this writeup to help anybody interested in develop
 Thanks to @mattaereal and @patrickd_de for their in deep writeups which help me to understand the vulnerability behind this challenges (totally recommended visit their blogs with a lot more of security information).
 I used hardhat to resolve all these challenges so please feel free to delete all console.log lines i used to debug trying to reach the solution (I left them with the hope that they can help you for a better understanding).
 
-Any comments/corrections please reach me at my twitter account: **@faucet0x9a54**
+Any comments/corrections please reach me at my twitter account: **@devnet0x**
 
 ## Challenge 0: VitaToken seems safe, right? ##
 The key in this challenge is ask ourself: why VToken needs to override the openzepelin current implementation?. So you compare both functions:
@@ -36,7 +36,7 @@ The test file. Just change the addresses (toa and toa2) for your own deployed co
 ![](./img/05.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/0_Vitatoken
 
 
 ##  Challenge 1: What a nice Lender Pool! ##
@@ -59,7 +59,7 @@ And this is the test sequence (only call to our attackers contract and change co
 ![](./img/09.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/1_LenderPool
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/1_LenderPool
 
 ## Challenge 2: it's always sunny in decentralized exchanges ##
 In this challenge, we need to drain liquidity from the Dex, so analyzing contract we need to removeLiquidity, but how ca we do that if only can remove the same amount that we previously deposited?.
@@ -76,7 +76,7 @@ Finally, let’s deploy and setup our challenge (see deploy.js) and runit with t
 ![](./img/12.png)
 
 Source Code:
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_Dex
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/2_Dex
 
 
 ## Challenge 3: borrow, hide and seek ##
@@ -104,4 +104,4 @@ Then, lets deploy and setup our challenge with deploy.js and finally lets test o
 
 Source Code:
 
-https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x/3_Borrower
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/A-maze-x/3_Borrower
