@@ -8,6 +8,7 @@ To get started with this course, clone this repo and follow these commands:
 4. Start coding!
 
 #SOLANA NFT METAPLEX
+`
 @solana/spl-token-registry
 sudo apt install libudev-dev pkg-config unzip
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
@@ -17,3 +18,4 @@ sugar upload
 sugar deploy
 sugar verify
 sugar update // To update drop time edit config.json
+`
