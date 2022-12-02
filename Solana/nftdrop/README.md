@@ -19,3 +19,10 @@ sugar deploy
 sugar verify
 sugar update // To update drop time edit config.json
 ```
+#VERCEL
+```
+npm i -g vercel
+vercel
+si da error entonces revisar node version en project settings de vercel.com
+vercel --prod
+```
