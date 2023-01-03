@@ -85,6 +85,14 @@ Wait (30 minutes aprox.) to receive message in L1.
 
 ![](./106.png)
 
+In page bottom you will see your L1 transaction hash who received the message:
+
+![](./1061.png)
+
+And, if you follow the link, you will see (in [logs](https://goerli.etherscan.io/tx/0xc3ebd92183cfb838cce9d93828add75fd36c25d09090b1081a3aa973cc65bd0b#eventlog) tab) the received message in L1 with L1 account address:
+
+![](./1062.png)
+
 Now, call [createNftFromL2](https://goerli.etherscan.io/address/0x6DD77805FD35c91EF6b2624Ba538Ed920b8d0b4E#writeContract) in L1 MessagingNft to trigger the message consumption on L1 
           
 ![](./107.png)
