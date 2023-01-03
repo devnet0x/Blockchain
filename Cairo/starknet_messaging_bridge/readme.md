@@ -1,4 +1,4 @@
-# Starknet Message Bridging Writeup #
+# Starknet Messaging Bridge Writeup #
 
 Hi, my name is Juan, i wrote this writeup to gain experience and help others to understand Starknet. 
 
@@ -56,5 +56,47 @@ Also, we can go to L2 contract evaluator and verify received message
 Done.
 
 ## Exercise 1 - Send an L2→L1 message with your contract (2 pts) ##
+
+Write a contract on L2 that will send a message to L1 MessagingNft and trigger createNftFromL2. Your function should be called create_l1_nft_message. As we can see in L1 consumer contract, what we need to send as payload is L1 account address (msg.sender):
+
+![](./101.png)
+
+So, our contract is:
+          
+![](./102.png)
+
+Now, lets deploy our contract in L2:
+
+![](./103.png)
+
+Then, submit the contract address to L2 Evaluator by calling [submit_exercise](https://goerli.voyager.online/contract/0x595bfeb84a5f95de3471fc66929710e92c12cce2b652cd91a6fef4c5c09cd99#writeContract) function:
+
+![](./104.png)      
+
+Call ex1a of L2 Evaluator to trigger the message sending to L1 (using yout L1 account number as parameters):
+
+![](./105.png)
+
+In the background, ex1a will call our create_l1_nft_message created function:
+
+![](./1051.png)
+
+Wait (30 minutes aprox.) to receive message in L1.
+
+![](./106.png)
+
+Now, call [createNftFromL2](https://goerli.etherscan.io/address/0x6DD77805FD35c91EF6b2624Ba538Ed920b8d0b4E#writeContract) in L1 MessagingNft to trigger the message consumption on L1 
+          
+![](./107.png)
+
+And, in goerli [transaction](https://goerli.etherscan.io/tx/0x3e55f74faf45f169bc7d597ad48b7983de083f4c66f6eac709fac8ce4b6b084e#eventlog) we can see our consumed message:
+
+![](./1071.png)
+
+Done, L1 MessagingNft will sends back a message to L2 to credit your points on L2: 
+
+![](./108.png)
+
+## Exercise 2 - Send an L1→L2 message with your contract (2 pts) ##
 
 (..soon)
