@@ -109,4 +109,62 @@ Done, L1 MessagingNft will sends back a message to L2 to credit your points on L
 
 ## Exercise 2 - Send an L1→L2 message with your contract (2 pts) ##
 
+We need to write and deploy a contract on L1 that sends messages to L2. This contract on L1 must send a message to L2 Evaluator and trigger ex2 function. 
+
+So, at first we analize ex2 function and review if we need to call it with parameters. As you can see, ex2 have 2 parameters but the first (from_address) is filled by starknet OS, so we only need to send the second parameter (l2_user):
+
+![](./img/200.png)
+
+Then, this is our L1 contract which will call our function in solidity (using remix):
+
+![](./img/203.png)
+
+where:
+
+L2ContractAddress: L2 evaluator contract address.
+
+L2ContractSelector: Obtained by calling this function in python using function name as documented [here](https://starknet.io/docs/hello_starknet/l1l2.html#receiving-a-message-from-l1).
+
+![](./img/202.png)
+
+l2_user: Our L2 user address.
+
+starknetCore: Obtained using this instruction as indicated in the exercise [instructions](https://github.com/starknet-edu/starknet-messaging-bridge#exercise-2---send-an-l1l2-message-with-your-contract-2-pts):
+
+![](./img/201.png)
+
+Now, lets deploy our contract in L1 goerli and execute our sendMsgToL2() function:
+
+![](./img/204.png)
+
+After execute our function we can get the L1 goerli transaction hash:
+
+![](./img/205.png)
+
+And search our transaction hash in [etherscan](https://goerli.etherscan.io/tx/0xd4f8e40c96a9cc35adbddc2ec690b54a7605705b016ae5bd6609bec3bb6dfa5d#eventlog) to find:
+
+Topic 2 : With destination address in L2.
+
+Data    : With parameters sended from L1 to L2 (in this case with our L2 account number)
+
+![](./img/206.png)
+
+Now we can go to L2 to search our [message](https://goerli.voyager.online/contract/0x0595bfeb84a5f95de3471fc66929710e92c12cce2b652cd91a6fef4c5c09cd99#messages) in voyager:
+
+![](./img/207.png)
+
+And click in [message hash](https://goerli.voyager.online/message/0xb1556cc8c7e4cb3ee8f3362f0fe2f71a7edbcbdf0bb319933c51e154428865c4) to watch message details:
+
+![](./img/208.png)
+
+Finally, your points are automatically attributed on L2.
+
+![](./img/209.png)
+
+
+[(Source Code)](./src/l1.sol)
+
+
+## Exercise 3 - Receive an L2→L1 message with your contract (2 pts) ##
+
 (..soon)
