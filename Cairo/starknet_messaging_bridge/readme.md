@@ -1,8 +1,20 @@
 # Starknet Messaging Bridge Writeup #
 
-Hi, my name is Juan, i wrote this writeup to gain experience and help others to understand Starknet. 
+Hi, my name is Juan, i wrote this writeup to gain experience and help others to understand Starknet messages resolving [Starknet Messaging Bridge workshop](https://github.com/starknet-edu/starknet-messaging-bridge). This writeup is full of spoilers so try to resolve by your own before moving forward with each step:
 
-Any comments/corrections please reach me at my twitter account: [@devnet0x](https://twitter.com/devnet0x/)
+I will appreciate any comments/corrections so please find me at my twitter account: [@devnet0x](https://twitter.com/devnet0x/).
+
+Index:
+
+[exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts](#exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts)
+
+[exercise-1---send-an-l2→l1-message-with-your-contract-2-pts](#exercise-1---send-an-l2→l1-message-with-your-contract-2-pts)
+
+[exercise-2---send-an-l1→l2-message-with-your-contract-2-pts](#exercise-2---send-an-l1→l2-message-with-your-contract-2-pts)
+
+[exercise-3---receive-an-l2→l1-message-with-your-contract-2-pts](#exercise-3---receive-an-l2→l1-message-with-your-contract-2-pts)
+
+[exercise-4---receive-an-l1→l2-message-with-your-contract-2-pts](#exercise-4---receive-an-l1→l2-message-with-your-contract-2-pts)
 
 ## Exercise 0 - Send an L2→L1→L2 message with existing contracts (2 pts) ##
 
@@ -167,4 +179,98 @@ Finally, your points are automatically attributed on L2.
 
 ## Exercise 3 - Receive an L2→L1 message with your contract (2 pts) ##
 
-(..soon)
+
+Exercise 3 - Receive an L2→L1 message with your contract (2 pts)
+
+We must write a contract on L1 that will receive a message from from function ex3_a. 
+To make sure our contract is able to handle the message we must analyze the function which will send the message and take note about parameters.
+           
+![](./img/301.png)
+
+So, we must use one parameter in payload (l2 user account) and call our function as consumeMessage with two parameters as specified in ex3 contract on L1 (line 51):
+
+![](./img/3011.png)
+
+Then, this will be our contract on remix:
+
+![](./img/302.png)
+
+Now connect your metamask wallet (select option inyected provider) and select "L1ConsumerContract":  
+
+![](./img/303.png)
+
+Then press deploy button and confirm in metamask:
+
+![](./img/304.png)
+
+Once deployed on L1 goerli, we will see our contract address in "Deployed Contracts" section:
+
+![](./img/3041.png)
+
+Now, call ex3_a of L2 Evaluator to send an L2→L1 message (using previous L1 contract address): 
+
+![](./img/305.png)
+
+And wait 30 minutes to confirm our message was received on L1:
+      
+![](./img/306.png)
+
+Call ex3 of L1 Evaluator, which triggers message consumption from your L1 contract 
+
+![](./img/307.png)
+
+![](./img/308.png)
+
+L1 evaluator will also send back a message to L2 to distribute your points 
+
+![](./img/309.png)
+
+[(Source Code)](./src/l1consumer.sol)
+
+## Exercise 4 - Receive an L1→L2 message with your contract (2 pts) ##
+
+In this exercise, we must write an L2 contract that be able to receive a message from ex4 of L1 Evaluator. So, when we analyze ex4 function we can see we will need to receive one value with the random number as payload.
+
+![](./img/401.png)
+
+And, something additional in ex4_b validator function use a second call (to l1_assigned_var) to validate that we know the random number:
+
+![](./img/402.png)
+
+Then, we write our L2 contract in cairo with 2 functions (one custom that will be called by the message and a second that will be called by ex4_b validator). Please note that our custom function must have [@l1_handler](https://www.cairo-lang.org/docs/hello_starknet/l1l2.html#receiving-a-message-from-l1) as decorator (this give me a great headache because without this decorator message fails..:) ) 
+
+![](./img/403.png)
+
+Now, we compile our contract on L2:
+
+![](./img/404.png)
+
+Declare his class:
+
+![](./img/405.png)
+
+And deploy to Starknet goerli L2:
+
+![](./img/406.png)
+
+Now, we call ex4 of L1 Evaluator to send the random value out to your L2 contract, but before we must need to calculate selector to call our custom function: 
+      
+![](./img/407.png)
+
+![](./img/408.png)
+      
+Submit your L2 contract address by calling submit_exercise of L2 Evaluator:
+
+![](./img/409.png)
+      
+And finally, call ex4_b of L2 Evaluator that will check you completed your work correctly and distribute your points:
+
+![](./img/410.png)
+
+![](./img/411.png)
+
+[(Source Code)](./src/l2receiver.cairo)
+
+Well done, i hope this writeup has been useful for you and i will be waiting for your github stars!!!...:)
+
+Please check my other [published writeups](https://github.com/devnet0x).
