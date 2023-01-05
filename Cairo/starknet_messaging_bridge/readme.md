@@ -6,7 +6,7 @@ I will appreciate any comments/corrections so please find me at my twitter accou
 
 Index:
 
-[exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts](#exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts)
+[exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts](#1)
 
 [exercise-1---send-an-l2→l1-message-with-your-contract-2-pts](#exercise-1---send-an-l2→l1-message-with-your-contract-2-pts)
 
@@ -67,6 +67,7 @@ Also, we can go to L2 contract evaluator and verify received message
 
 Done.
 
+<a name="1"></a>
 ## Exercise 1 - Send an L2→L1 message with your contract (2 pts) ##
 
 Write a contract on L2 that will send a message to L1 MessagingNft and trigger createNftFromL2. Your function should be called create_l1_nft_message. As we can see in L1 consumer contract, what we need to send as payload is L1 account address (msg.sender):
