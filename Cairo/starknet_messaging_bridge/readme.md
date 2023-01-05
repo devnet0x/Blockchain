@@ -6,16 +6,17 @@ I will appreciate any comments/corrections so please find me at my twitter accou
 
 Index:
 
-[exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts](#1)
+[exercise-0---send-an-l2→l1→l2-message-with-existing-contracts-2-pts](#0)
 
-[exercise-1---send-an-l2→l1-message-with-your-contract-2-pts](#exercise-1---send-an-l2→l1-message-with-your-contract-2-pts)
+[exercise-1---send-an-l2→l1-message-with-your-contract-2-pts](#1)
 
-[exercise-2---send-an-l1→l2-message-with-your-contract-2-pts](#exercise-2---send-an-l1→l2-message-with-your-contract-2-pts)
+[exercise-2---send-an-l1→l2-message-with-your-contract-2-pts](#2)
 
-[exercise-3---receive-an-l2→l1-message-with-your-contract-2-pts](#exercise-3---receive-an-l2→l1-message-with-your-contract-2-pts)
+[exercise-3---receive-an-l2→l1-message-with-your-contract-2-pts](#3)
 
-[exercise-4---receive-an-l1→l2-message-with-your-contract-2-pts](#exercise-4---receive-an-l1→l2-message-with-your-contract-2-pts)
+[exercise-4---receive-an-l1→l2-message-with-your-contract-2-pts](#4)
 
+<a name="0"></a>
 ## Exercise 0 - Send an L2→L1→L2 message with existing contracts (2 pts) ##
 
 Open evaluator [contract](https://goerli.voyager.online/contract/0x595bfeb84a5f95de3471fc66929710e92c12cce2b652cd91a6fef4c5c09cd99#writeContract) and go to ex_0_a function to add your L1 (goerli) account and some amount. In this example i will use 123 tokens (remember this token have 18 decimals).
@@ -120,6 +121,7 @@ Done, L1 MessagingNft will sends back a message to L2 to credit your points on L
 
 [(Source Code)](./src/l1l2.cairo)
 
+<a name="2"></a>
 ## Exercise 2 - Send an L1→L2 message with your contract (2 pts) ##
 
 We need to write and deploy a contract on L1 that sends messages to L2. This contract on L1 must send a message to L2 Evaluator and trigger ex2 function. 
@@ -177,11 +179,8 @@ Finally, your points are automatically attributed on L2.
 
 [(Source Code)](./src/l1.sol)
 
-
+<a name="3"></a>
 ## Exercise 3 - Receive an L2→L1 message with your contract (2 pts) ##
-
-
-Exercise 3 - Receive an L2→L1 message with your contract (2 pts)
 
 We must write a contract on L1 that will receive a message from from function ex3_a. 
 To make sure our contract is able to handle the message we must analyze the function which will send the message and take note about parameters.
@@ -228,6 +227,7 @@ L1 evaluator will also send back a message to L2 to distribute your points
 
 [(Source Code)](./src/l1consumer.sol)
 
+<a name="4"></a>
 ## Exercise 4 - Receive an L1→L2 message with your contract (2 pts) ##
 
 In this exercise, we must write an L2 contract that be able to receive a message from ex4 of L1 Evaluator. So, when we analyze ex4 function we can see we will need to receive one value with the random number as payload.
