@@ -31,7 +31,7 @@ We can see L1 hash transaction in bottom page:
 
 ![](./img/03.png)
 
-Now, before minting our tokens in L1, we need to know the secret number (which in fact, is not secret because is stored in the blockchain). To know this number, we analize ex_0_a function and we can see this secret number used as parameter and sended to L1 (line 137):
+Now, before minting our tokens in L1, we need to know the secret number (which in fact, is not secret because is stored in the blockchain). To know this number, we analize ex_0_a function and we can see that secret number is used as parameter in payload and sended to L1 inside the message (lines 135 and 137) (dont forget that stored secret_value is different than sended secret_value which add 32):
 
 ![](./img/04.png)
 
@@ -51,7 +51,9 @@ Confirm our transaction in the wallet:
 
 ![](./img/08.png)
 
-Now, let's execute i_have_tokens function which is processed by ex_0_b. If we analyze this function, we can see that validated secret number must have the original secret number (substract 32 as we can see prevously in line 135):
+Now, let's execute i_have_tokens function which is processed by ex_0_b. If we analyze this function (line 159), we can see that validated secret number must have the original stored secret number (substract 32 as we previously saw were added in line 135):
+
+![](./img/081.png)
 
 ![](./img/09.png)
 
